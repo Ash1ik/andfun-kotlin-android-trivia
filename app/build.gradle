@@ -15,46 +15,55 @@
  */
 
 apply plugin: 'com.android.application'
-
 apply plugin: 'kotlin-android'
-
 apply plugin: 'kotlin-kapt'
+apply plugin: 'androidx.navigation.safeargs'
 
 android {
-    compileSdkVersion 28
-    dataBinding {
-        enabled = true
+    namespace "com.example.android.navigation"
+    compileSdkVersion 34 // Update to the latest compile SDK version
+    buildFeatures {
+        dataBinding true
     }
     defaultConfig {
         applicationId 'com.example.android.navigation'
         minSdkVersion 19
-        targetSdkVersion 28
+        targetSdkVersion 34 // Update to the latest target SDK version
         vectorDrawables.useSupportLibrary = true
         versionCode 1
         versionName "1.0"
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
     }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
     productFlavors {
+        // Add any product flavors if needed
     }
 }
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+
     // Kotlin
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$version_kotlin"
+    implementation ("org.jetbrains.kotlin:kotlin-stdlib:1.9.22") // Updated Kotlin version
 
     // Constraint Layout
-    implementation "androidx.constraintlayout:constraintlayout:$version_constraint_layout"
+    implementation ("androidx.constraintlayout:constraintlayout:2.1.4") // Updated Constraint Layout version
 
     // Core
-    implementation "androidx.core:core:$version_core"
+    implementation ("androidx.core:core-ktx:1.13.1") // Updated Core version
 
     // Material Design
-    implementation "com.google.android.material:material:$version_material"
+    implementation ("com.google.android.material:material:1.12.0") // Updated Material Design version
+
+    // Navigation
+    implementation("androidx.navigation:navigation-fragment-ktx:2.7.7") // Updated Navigation version
+    implementation ("androidx.navigation:navigation-ui-ktx:2.7.7")
 }
